@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "api"
+name = "acme-api"
 version = "0.1.0"
 description = ""
 authors = ["Ben Fasoli <ben@pngme.com>"]
 readme = "README.md"
+packages = [{include = "acme_api"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

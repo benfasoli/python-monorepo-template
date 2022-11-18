@@ -1,10 +1,9 @@
 [tool.poetry]
-name = "acme-dtos"
+name = "auth"
 version = "0.1.0"
 description = ""
 authors = ["Ben Fasoli <ben@pngme.com>"]
 readme = "README.md"
-packages = [{include = "acme_dtos"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

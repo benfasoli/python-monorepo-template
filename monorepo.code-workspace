@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "src/packages/acme-api"
+		},
+		{
+			"path": "src/packages/acme-core"
+		},
+		{
+			"path": "src/services/auth"
+		},
+		{
+			"path": "src/services/users"
+		}
+	],
+	"settings": {}
+}
