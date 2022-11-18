@@ -1,0 +1,16 @@
+name: Integration
+
+on: push
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  integration:
+    name: Lint and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - run: echo noop

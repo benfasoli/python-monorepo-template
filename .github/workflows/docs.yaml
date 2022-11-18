@@ -1,0 +1,16 @@
+name: Documentation
+
+on: push
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  documentation:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - run: echo noop
