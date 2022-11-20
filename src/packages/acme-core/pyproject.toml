@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Ben Fasoli <ben@pngme.com>"]
 readme = "README.md"
-packages = [{include = "acme_core"}]
+packages = [{include = "acme/core"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
