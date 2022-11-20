@@ -1,4 +1,4 @@
-name: Integration
+name: Test
 
 on: push
 
@@ -7,10 +7,13 @@ defaults:
     shell: bash
 
 jobs:
-  integration:
+  test:
     name: Lint and test
     runs-on: ubuntu-latest
     timeout-minutes: 1
 
     steps:
       - run: echo noop
+      # - format
+      # - lint
+      # - test

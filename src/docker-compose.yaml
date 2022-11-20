@@ -1,0 +1,4 @@
+services:
+  auth:
+    build: services/auth
+    image: auth:latest

@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo noop
+      # - uses: actions/checkout@v3
+      # - read version from pyproject.toml, create tag package-name-v0.0.0
+      # - name: Create tag
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       github.rest.git.createRef({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         ref: 'refs/tags/<tagname>',
+      #         sha: context.sha
+      #       })
+  
+  services:
+    needs: packages
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo noop
