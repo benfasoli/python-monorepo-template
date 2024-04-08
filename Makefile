@@ -1,34 +1,51 @@
 .PHONY: all
-all: install lint test
+all: clean install format lint test
 
-.PHONY: install
-install:
-	python3.10 -m venv .venv
-	.venv/bin/pip install .[dev]
-	
 .PHONY: build
 build:
-	docker compose --file src/docker-compose.yaml build --ssh default
+	docker compose -f docker/compose.build.yaml build
 
 .PHONY: clean
 clean:
-	rm -fr .venv
-	rm -fr .mypy_cache
-	rm -fr .pytest_cache
-	rm -fr .ruff_cache
-	find . -name '*.py[co]' -type f -exec rm -f {} +
-	find . -name '__pycache__' -type d -exec rm -fr {} +
+	rm -f `find . -name .coverage`
+	rm -rf `find . -name .mypy_cache`
+	rm -rf `find . -name .pdm-build`
+	rm -rf `find . -name .pdm-python`
+	rm -rf `find . -name .pytest_cache`
+	rm -rf `find . -name .ruff_cache`
+	rm -rf `find . -name .venv`
+	rm -f `find . -name '*.pyc'`
+	rm -f `find . -name '*.pyo'`
+
+.PHONY: infra-local
+infra-local:
+	docker stop `docker ps -aq`
+	docker compose up --detach --remove-orphans
+
+.PHONY: install
+install:
+	$(MAKE) -C lib/core $@
+	$(MAKE) -C lib/dtos $@
+	$(MAKE) -C services/api $@
+	$(MAKE) -C services/worker $@
 
 .PHONY: format
 format:
-	.venv/bin/black  .
+	$(MAKE) -C lib/core $@
+	$(MAKE) -C lib/dtos $@
+	$(MAKE) -C services/api $@
+	$(MAKE) -C services/worker $@
 
 .PHONY: lint
 lint:
-	.venv/bin/black --check --diff .
-	.venv/bin/ruff .
-	.venv/bin/mypy .
+	$(MAKE) -C lib/core $@
+	$(MAKE) -C lib/dtos $@
+	$(MAKE) -C services/api $@
+	$(MAKE) -C services/worker $@
 
 .PHONY: test
 test:
-	.venv/bin/pytest --cov-report=html:.coverage_html --cov-report=term-missing --cov-config=pyproject.toml --cov=src --cov=tests
+	$(MAKE) -C lib/core $@
+	$(MAKE) -C lib/dtos $@
+	$(MAKE) -C services/api $@
+	$(MAKE) -C services/worker $@

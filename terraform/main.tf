@@ -1,7 +1,3 @@
-module "auth" {
-  source = "./modules/auth"
-}
-
-module "users" {
-  source = "./modules/users"
+module "api" {
+  source = "./modules/api"
 }

@@ -1,0 +1,28 @@
+name: CI lib-core
+
+on: push
+
+jobs:
+  test:
+    name: Lint & test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PDM
+        uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: "3.12"
+          cache: true
+          cache-dependency-path: "**/pdm.lock"
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Lint
+        run: make lint
+
+      - name: Test
+        run: make test
