@@ -1,3 +1,4 @@
+# .gitignore
 **/.coverage
 **/.local
 **/.mypy_cache
@@ -10,3 +11,12 @@
 **/*.py[cod]
 **/*.so
 **/__pycache__
+
+# .dockerignore
+**/.gitignore
+**/.vscode
+.git
+.github
+docker
+helm
+terraform
