@@ -18,5 +18,3 @@
 .git
 .github
 docker
-helm
-terraform
