@@ -3,12 +3,11 @@ all: clean install format lint test
 
 .PHONY: build
 build:
-	docker compose -f docker/compose.build.yaml build
+	docker compose -f docker/build/compose.yaml build
 
 .PHONY: clean
 clean:
 	rm -f `find . -name .coverage`
-	rm -rf `find . -name .mypy_cache`
 	rm -rf `find . -name .pdm-build`
 	rm -rf `find . -name .pdm-python`
 	rm -rf `find . -name .pytest_cache`
@@ -24,28 +23,18 @@ infra-local:
 
 .PHONY: install
 install:
-	$(MAKE) -C lib/core $@
-	$(MAKE) -C lib/dtos $@
-	$(MAKE) -C services/api $@
-	$(MAKE) -C services/worker $@
+	uv sync
 
 .PHONY: format
 format:
-	$(MAKE) -C lib/core $@
-	$(MAKE) -C lib/dtos $@
-	$(MAKE) -C services/api $@
-	$(MAKE) -C services/worker $@
+	uv run -- ruff format
 
 .PHONY: lint
 lint:
-	$(MAKE) -C lib/core $@
-	$(MAKE) -C lib/dtos $@
-	$(MAKE) -C services/api $@
-	$(MAKE) -C services/worker $@
+	uv run -- ruff format --check
+	uv run -- ruff check
+	uv run -- pyright
 
 .PHONY: test
 test:
-	$(MAKE) -C lib/core $@
-	$(MAKE) -C lib/dtos $@
-	$(MAKE) -C services/api $@
-	$(MAKE) -C services/worker $@
+	uv run -- pytest

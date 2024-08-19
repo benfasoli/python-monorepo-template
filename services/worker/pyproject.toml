@@ -1,37 +1,21 @@
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
 [project]
 name = "worker"
 version = "0.0.0"
 requires-python = "~=3.12"
 dependencies = [
-    "lib.core @ file:///${PROJECT_ROOT}/../../lib/core",
-    "lib.dtos @ file:///${PROJECT_ROOT}/../../lib/dtos",
+    "lib-core",
+    "lib-dtos",
 ]
 
-[tool.pdm.dev-dependencies]
-dev = [
-    "-e lib.core @ file:///${PROJECT_ROOT}/../../lib/core",
-    "-e lib.dtos @ file:///${PROJECT_ROOT}/../../lib/dtos",
-    "mypy ~= 1.8",
-    "pytest ~= 8.0",
-    "pytest-cov ~= 4.1",
+[tool.uv]
+dev-dependencies = [
     "python-dotenv[cli] ~= 1.0",
-    "ruff ~= 0.2",
 ]
 
-[tool.mypy]
-check_untyped_defs = true
-explicit_package_bases = true
-strict = true
+[tool.uv.sources]
+lib-core = { workspace = true }
+lib-dtos = { workspace = true }
 
-[tool.ruff]
-target-version = "py312"
-
-[tool.ruff.lint]
-select = ["E", "F", "UP", "B", "SIM", "I"]
-
-[tool.ruff.lint.isort]
-known-first-party = ["lib"]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"

@@ -1,7 +1,6 @@
 # .gitignore
 **/.coverage
 **/.local
-**/.mypy_cache
 **/.pdm-build
 **/.pdm-python
 **/.pytest_cache
@@ -15,6 +14,7 @@
 # .dockerignore
 **/.gitignore
 **/.vscode
+**/tests
 .git
 .github
 docker

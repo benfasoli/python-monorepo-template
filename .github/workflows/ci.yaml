@@ -1,4 +1,4 @@
-name: CI lib-core
+name: CI
 
 on: push
 
@@ -11,15 +11,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup PDM
-        uses: pdm-project/setup-pdm@v4
-        with:
-          python-version: "3.12"
-          cache: true
-          cache-dependency-path: "**/pdm.lock"
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Install dependencies
-        run: make install
+      - name: Install python
+        run: uv python install
+
+      - name: Install python dependencies
+        run: uv sync --locked
 
       - name: Lint
         run: make lint

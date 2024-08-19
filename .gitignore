@@ -1,6 +1,5 @@
 **/.coverage
 **/.local
-**/.mypy_cache
 **/.pdm-build
 **/.pdm-python
 **/.pytest_cache

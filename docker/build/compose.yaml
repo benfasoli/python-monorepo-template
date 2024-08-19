@@ -1,0 +1,16 @@
+services:
+  api:
+    image: api:latest
+    build:
+      context: ../../
+      dockerfile: docker/build/Dockerfile.service
+      args:
+        SERVICE_NAME: api
+
+  worker:
+    image: worker:latest
+    build:
+      context: ../../
+      dockerfile: docker/build/Dockerfile.service
+      args:
+        SERVICE_NAME: worker
