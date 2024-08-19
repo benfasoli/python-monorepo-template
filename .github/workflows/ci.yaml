@@ -20,8 +20,11 @@ jobs:
       - name: Install python dependencies
         run: uv sync --locked
 
-      - name: Lint
+      - name: Lint 🔬
         run: make lint
 
-      - name: Test
+      - name: Test 🧑‍🔬
         run: make test
+
+      - name: Build 🏗️
+        run: make build
