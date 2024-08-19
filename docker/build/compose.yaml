@@ -3,7 +3,7 @@ services:
     image: api:latest
     build:
       context: ../../
-      dockerfile: docker/build/Dockerfile.service
+      dockerfile: docker/build/Dockerfile
       args:
         SERVICE_NAME: api
 
@@ -11,6 +11,6 @@ services:
     image: worker:latest
     build:
       context: ../../
-      dockerfile: docker/build/Dockerfile.service
+      dockerfile: docker/build/Dockerfile
       args:
         SERVICE_NAME: worker
