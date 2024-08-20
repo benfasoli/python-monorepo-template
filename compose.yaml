@@ -6,14 +6,16 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   worker:
     image: worker:latest
     build:
       dockerfile: services/worker/Dockerfile
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: postgres:16
@@ -28,3 +30,9 @@ services:
       - /var/lib/postgresql/data
     volumes:
       - ./sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
+      interval: 1s
+      timeout: 1s
+      retries: 1
+      start_period: 5s
