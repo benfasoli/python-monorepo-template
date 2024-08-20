@@ -3,7 +3,7 @@ name = "lib.dtos"
 version = "0.0.0"
 requires-python = "~=3.12"
 dependencies = [
-    "msgspec >= 0.18.6",
+    "pydantic ~= 2.8",
 ]
 
 [tool.uv]

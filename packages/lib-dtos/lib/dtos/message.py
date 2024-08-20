@@ -1,8 +1,6 @@
-import msgspec
-
-from . import encoder
+from pydantic import BaseModel
 
 
-class Message(msgspec.Struct, encoder.JSONAble):
+class Message(BaseModel):
     id: int
     body: str

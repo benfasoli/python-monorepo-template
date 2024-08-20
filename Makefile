@@ -1,9 +1,15 @@
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
 .PHONY: all
 all: clean install format lint test
 
 .PHONY: build
 build:
 	docker compose -f docker/build/compose.yaml build
+
+.PHONY: build
+dev: build
+	docker compose -f docker/build/compose.yaml up
 
 .PHONY: clean
 clean:
@@ -37,4 +43,4 @@ lint:
 
 .PHONY: test
 test:
-	uv run -- pytest
+	uv run -- pytest --cov-report=term-missing --cov .

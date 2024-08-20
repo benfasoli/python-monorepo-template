@@ -3,14 +3,12 @@ services:
     image: api:latest
     build:
       context: ../../
-      dockerfile: docker/build/Dockerfile
-      args:
-        SERVICE_NAME: api
+      dockerfile: services/api/Dockerfile
+    ports:
+      - 8080:8080
 
   worker:
     image: worker:latest
     build:
       context: ../../
-      dockerfile: docker/build/Dockerfile
-      args:
-        SERVICE_NAME: worker
+      dockerfile: services/worker/Dockerfile
