@@ -5,11 +5,6 @@ ENV SERVICE_ROOT=services/${SERVICE_NAME}
 
 WORKDIR /app
 
-RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends build-essential && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 COPY . .
 RUN --mount=from=ghcr.io/astral-sh/uv:0.2.37,source=/uv,target=/bin/uv \
     uv sync \
