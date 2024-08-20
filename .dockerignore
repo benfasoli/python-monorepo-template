@@ -13,8 +13,8 @@
 
 # .dockerignore
 **/.gitignore
-**/.vscode
 **/tests
 .git
 .github
-docker
+.vscode
+compose.yaml

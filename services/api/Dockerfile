@@ -7,7 +7,7 @@ ENV PORT=8080
 WORKDIR /app
 
 COPY . .
-RUN --mount=from=ghcr.io/astral-sh/uv:0.2.37,source=/uv,target=/bin/uv \
+RUN --mount=from=ghcr.io/astral-sh/uv:0.3.0,source=/uv,target=/bin/uv \
     uv sync \
     --no-cache \
     --no-dev \
