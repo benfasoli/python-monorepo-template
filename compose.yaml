@@ -2,18 +2,20 @@ services:
   api:
     image: api:latest
     build:
-      context: ..
       dockerfile: services/api/Dockerfile
     ports:
       - 8080:8080
+    depends_on:
+      - db
 
   worker:
     image: worker:latest
     build:
-      context: ..
       dockerfile: services/worker/Dockerfile
+    depends_on:
+      - db
 
-  postgres:
+  db:
     image: postgres:16
     command: ["postgres", "-c", "log_statement=all"]
     environment:

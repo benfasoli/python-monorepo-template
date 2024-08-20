@@ -9,11 +9,11 @@ help:  ## Show available options.
 
 .PHONY: build
 build:  ## Build docker image for each service
-	docker compose -f docker/compose.yaml build
+	docker compose build
 
 .PHONY: build
 dev: build  ## Build and run each service in a local docker container
-	docker compose -f docker/compose.yaml up
+	docker compose up
 
 .PHONY: clean
 clean:  ## Remove development artifacts
@@ -27,6 +27,10 @@ clean:  ## Remove development artifacts
 .PHONY: install
 install:  ## Install dependencies in .venv and refresh lockfile
 	uv sync
+
+.PHONY: infra
+infra:  ## Start local development infra in docker containers
+	docker compose up db
 
 .PHONY: format
 format:  ## Format code overwriting if necessary
