@@ -14,7 +14,7 @@ services:
       dockerfile: services/worker/Dockerfile
 
   postgres:
-    image: postgres:15
+    image: postgres:16
     command: ["postgres", "-c", "log_statement=all"]
     environment:
       POSTGRES_USER: postgres
