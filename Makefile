@@ -18,6 +18,7 @@ dev: build  ## Build and run each service in a local docker container
 .PHONY: clean
 clean:  ## Remove development artifacts
 	rm -f `find . -name .coverage`
+	rm -rf `find . -name .pdm-build`
 	rm -rf `find . -name .pytest_cache`
 	rm -rf `find . -name .ruff_cache`
 	rm -rf `find . -name .venv`
