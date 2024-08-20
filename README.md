@@ -11,26 +11,26 @@ This **python monorepo template** is for large codebases comprised of multiple p
 ## Layout
 
 ```
-├──  db  # sql migration scripts
-├──  packages  # core functionality grouped in python packages
-│   ├──  lib-core  # lib.core namespace package
-│   │   ├──  lib
-│   │   │   └──  core
-│   │   ├── 󰙨 tests
-│   │   └──  pyproject.toml  # package metadata and dependencies
-│   └──  lib-dtos
-├──  services  # application entrypoints and orchestration logic grouped by context
-│   ├── 󰒍 api
-│   │   ├── 󱧼 src  # src layout for tool discovery and import compatibility
-│   │   │   └── 󰒍 api
-│   │   ├── 󰙨 tests
-│   │   ├──  Dockerfile
-│   │   └──  pyproject.toml  # service metadata and dependencies
-│   └──  worker
-├──  compose.yaml  # build specs for services and infra dependencies
-├──  Makefile  # development environment task runner, see dedicated section
-├──  pyproject.toml  # workspace metadata and global tool configs
-└──  uv.lock  # cross-platform dependency lock file
+├── db  # sql migration scripts
+├── packages  # core functionality grouped in python packages
+│   ├── lib-core  # lib.core namespace package
+│   │   ├── lib
+│   │   │   └── core
+│   │   ├── tests
+│   │   └── pyproject.toml  # package metadata and dependencies
+│   └── lib-dtos
+├── services  # application entrypoints and orchestration logic grouped by context
+│   ├── api
+│   │   ├── src  # src layout for tool discovery and import compatibility
+│   │   │   └── api
+│   │   ├── tests
+│   │   ├── Dockerfile
+│   │   └── pyproject.toml  # service metadata and dependencies
+│   └── worker
+├── compose.yaml  # build specs for services and infra dependencies
+├── Makefile  # development environment task runner, see dedicated section
+├── pyproject.toml  # workspace metadata and global tool configs
+└── uv.lock  # cross-platform dependency lock file
 ```
 
 ## Development environment
