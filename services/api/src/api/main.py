@@ -1,22 +1,16 @@
-from dataclasses import dataclass
-
-from litestar import Litestar, Router, get
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 from lib.core import hello_world
 
+app = FastAPI(docs_url="/")
 
-@dataclass
-class GetIndexResponseDTO:
+
+class GetIndexResponseDTO(BaseModel):
     message: str
 
 
-@get(path="/")
+@app.get(path="/hello")
 async def get_index() -> GetIndexResponseDTO:
-    message = hello_world()
+    message = await hello_world()
     return GetIndexResponseDTO(message=message)
-
-
-router = Router(path="/", route_handlers=[get_index])
-
-
-app = Litestar(route_handlers=[router])
