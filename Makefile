@@ -1,14 +1,11 @@
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
-.DEFAULT_GOAL := help
-
 .PHONY: help
 help:  ## Show available options.
 	@echo
 	@echo "\033[1mUsage\033[0m: make <COMMAND>\n"
 	@echo "\033[1mCommands\033[0m:\n"
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
-
 
 .PHONY: build
 build:  ## Build docker image for each service
