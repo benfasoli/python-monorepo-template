@@ -1,4 +1,18 @@
 services:
+  api:
+    image: api:latest
+    build:
+      context: ..
+      dockerfile: services/api/Dockerfile
+    ports:
+      - 8080:8080
+
+  worker:
+    image: worker:latest
+    build:
+      context: ..
+      dockerfile: services/worker/Dockerfile
+
   postgres:
     image: postgres:15
     command: ["postgres", "-c", "log_statement=all"]
@@ -8,7 +22,6 @@ services:
       POSTGRES_DB: postgres
     ports:
       - 5432:5432
-    restart: unless-stopped
     tmpfs:
       - /var/lib/postgresql/data
     volumes:
