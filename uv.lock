@@ -1,6 +1,6 @@
 version = 1
 requires-python = ">=3.12, <4"
-environment-markers = [
+resolution-markers = [
     "python_full_version < '3.13'",
     "python_full_version >= '3.13'",
 ]
@@ -11,6 +11,13 @@ members = [
     "lib-core",
     "lib-dtos",
     "worker",
+]
+requirements = [
+    { name = "pyright", specifier = "~=1.1" },
+    { name = "pytest", specifier = "~=8.3" },
+    { name = "pytest-asyncio", specifier = "~=0.23" },
+    { name = "pytest-cov", specifier = "~=5.0" },
+    { name = "ruff", specifier = "~=0.6" },
 ]
 
 [[package]]
@@ -49,7 +56,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "httpx" },
-    { name = "python-dotenv" },
     { name = "python-dotenv", extra = ["cli"] },
 ]
 
@@ -457,7 +463,6 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "python-dotenv" },
     { name = "python-dotenv", extra = ["cli"] },
 ]
 
