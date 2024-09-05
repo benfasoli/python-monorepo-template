@@ -7,19 +7,17 @@ ENV PORT=8080
 WORKDIR /app
 
 COPY . .
-RUN --mount=from=ghcr.io/astral-sh/uv:0.4.0,source=/uv,target=/bin/uv \
+RUN --mount=from=ghcr.io/astral-sh/uv:0.4.5,source=/uv,target=/bin/uv \
     uv sync \
+    --locked \
     --no-cache \
     --no-dev \
-    --locked \
-    --python=/usr/local/bin/python \
-    --package=${SERVICE_NAME}
+    --package=${SERVICE_NAME} \
+    --python=/usr/local/bin/python
 
-# TODO: install uv dependencies to system environment once supported
-#   https://github.com/astral-sh/uv/issues/5964
 ENV PATH=".venv/bin:${PATH}"
-
 ENV PYTHONPATH=${SERVICE_ROOT}
+
 CMD uvicorn src.api.main:app \
     --host=0.0.0.0 \
     --port=${PORT}
