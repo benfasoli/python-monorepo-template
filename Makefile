@@ -11,7 +11,7 @@ help:  ## Show available options.
 build:  ## Build docker image for each service
 	docker compose build
 
-.PHONY: build
+.PHONY: dev
 dev: build  ## Build and run each service in a local docker container
 	docker compose up
 
