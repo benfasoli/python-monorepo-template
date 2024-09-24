@@ -2,7 +2,7 @@ services:
   api:
     image: api:latest
     build:
-      dockerfile: services/api/Dockerfile
+      dockerfile: apps/api/Dockerfile
     ports:
       - 8080:8080
     depends_on:
@@ -12,7 +12,7 @@ services:
   worker:
     image: worker:latest
     build:
-      dockerfile: services/worker/Dockerfile
+      dockerfile: apps/worker/Dockerfile
     depends_on:
       db:
         condition: service_healthy
