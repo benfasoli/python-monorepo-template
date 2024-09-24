@@ -38,11 +38,11 @@ format:  ## Format code overwriting if necessary
 	uv run -- ruff format
 
 .PHONY: lint
-lint:  ## Run static analysis checks for all packages and services
+lint:  ## Run static analysis checks for all libs and apps
 	uv run -- ruff format --check
 	uv run -- ruff check
 	uv run -- pyright
 
 .PHONY: test
-test:  ## Run tests for all packages and services
+test:  ## Run tests for all libs and apps
 	uv run -- pytest --cov-report=term-missing --cov .

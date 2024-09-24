@@ -45,7 +45,7 @@ wheels = [
 [[package]]
 name = "api"
 version = "0.0.0"
-source = { editable = "services/api" }
+source = { editable = "apps/api" }
 dependencies = [
     { name = "fastapi" },
     { name = "lib-core" },
@@ -62,7 +62,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = "~=0.112" },
-    { name = "lib-core", editable = "packages/lib-core" },
+    { name = "lib-core", editable = "libs/lib-core" },
     { name = "pydantic", specifier = "~=2.8" },
     { name = "uvicorn", specifier = "~=0.27" },
 ]
@@ -214,12 +214,12 @@ wheels = [
 [[package]]
 name = "lib-core"
 version = "0.0.0"
-source = { editable = "packages/lib-core" }
+source = { editable = "libs/lib-core" }
 
 [[package]]
 name = "lib-dtos"
 version = "0.0.0"
-source = { editable = "packages/lib-dtos" }
+source = { editable = "libs/lib-dtos" }
 dependencies = [
     { name = "pydantic" },
 ]
@@ -454,7 +454,7 @@ wheels = [
 [[package]]
 name = "worker"
 version = "0.0.0"
-source = { editable = "services/worker" }
+source = { editable = "apps/worker" }
 dependencies = [
     { name = "lib-core" },
     { name = "lib-dtos" },
@@ -468,8 +468,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "lib-core", editable = "packages/lib-core" },
-    { name = "lib-dtos", editable = "packages/lib-dtos" },
+    { name = "lib-core", editable = "libs/lib-core" },
+    { name = "lib-dtos", editable = "libs/lib-dtos" },
     { name = "uvloop", specifier = "~=0.20" },
 ]
 

@@ -1,4 +1,4 @@
-This **python monorepo template** is for large codebases comprised of multiple python packages (application layer logic, infrastructure facades, data (de)serialization, observability, etc.) and services (HTTP APIs, data platform workers).
+This **python monorepo template** is for large codebases comprised of multiple python libraries (application layer logic, infrastructure facades, data (de)serialization, observability, etc.) and applications (HTTP APIs, data platform workers).
 
 ## Highlights
 
@@ -11,15 +11,7 @@ This **python monorepo template** is for large codebases comprised of multiple p
 ## Layout
 
 ```
-├── db  # sql migration scripts
-├── packages  # core functionality grouped in python packages
-│   ├── lib-core  # lib.core namespace package
-│   │   ├── lib
-│   │   │   └── core
-│   │   ├── tests
-│   │   └── pyproject.toml  # package metadata and dependencies
-│   └── lib-dtos
-├── services  # application entrypoints and orchestration logic grouped by context
+├── apps  # application entrypoints and orchestration logic grouped by context
 │   ├── api
 │   │   ├── src  # src layout for tool discovery and import compatibility
 │   │   │   └── api
@@ -27,6 +19,14 @@ This **python monorepo template** is for large codebases comprised of multiple p
 │   │   ├── Dockerfile
 │   │   └── pyproject.toml  # service metadata and dependencies
 │   └── worker
+├── db  # sql migration scripts
+├── libs  # core functionality grouped in python packages
+│   ├── lib-core  # lib.core namespace package
+│   │   ├── lib
+│   │   │   └── core
+│   │   ├── tests
+│   │   └── pyproject.toml  # package metadata and dependencies
+│   └── lib-dtos
 ├── compose.yaml  # build specs for services and infra dependencies
 ├── Makefile  # development environment task runner, see dedicated section
 ├── pyproject.toml  # workspace metadata and global tool configs
@@ -73,7 +73,7 @@ Create a new repo from this template and clone the repo.
   db-1  | This user must also own the server process.
   ```
 
-- `make test` will run pytest across all packages and services. Requires running `make infra` in a separate shell to monitor infra logs.
+- `make test` will run pytest across all libraries and applications. Requires running `make infra` in a separate shell to monitor infra logs.
 
   ```
   > make test
@@ -81,19 +81,19 @@ Create a new repo from this template and clone the repo.
   ---------- coverage: platform darwin, python 3.12.5-final-0 ----------
   Name                                     Stmts   Miss  Cover   Missing
   ----------------------------------------------------------------------
-  packages/lib-core/lib/core/__init__.py       2      0   100%
-  packages/lib-core/lib/core/hello.py          2      0   100%
-  packages/lib-core/tests/test_core.py         9      0   100%
-  packages/lib-dtos/lib/dtos/__init__.py       2      0   100%
-  packages/lib-dtos/lib/dtos/message.py        4      0   100%
-  packages/lib-dtos/tests/test_dtos.py         7      0   100%
-  services/api/src/api/__init__.py             0      0   100%
-  services/api/src/api/main.py                10      0   100%
-  services/api/tests/test_main.py             12      0   100%
-  services/worker/src/worker/__init__.py       0      0   100%
-  services/worker/src/worker/main.py           5      0   100%
-  services/worker/src/worker/queue.py          7      0   100%
-  services/worker/tests/test_main.py           8      0   100%
+  apps/api/src/api/__init__.py             0      0   100%
+  apps/api/src/api/main.py                10      0   100%
+  apps/api/tests/test_main.py             12      0   100%
+  apps/worker/src/worker/__init__.py       0      0   100%
+  apps/worker/src/worker/main.py           5      0   100%
+  apps/worker/src/worker/queue.py          7      0   100%
+  apps/worker/tests/test_main.py           8      0   100%
+  libs/lib-core/lib/core/__init__.py       2      0   100%
+  libs/lib-core/lib/core/hello.py          2      0   100%
+  libs/lib-core/tests/test_core.py         9      0   100%
+  libs/lib-dtos/lib/dtos/__init__.py       2      0   100%
+  libs/lib-dtos/lib/dtos/message.py        4      0   100%
+  libs/lib-dtos/tests/test_dtos.py         7      0   100%
   ----------------------------------------------------------------------
   TOTAL                                       68      0   100%
 
@@ -149,6 +149,6 @@ Create a new repo from this template and clone the repo.
     install      Install dependencies in .venv and refresh lockfile
     infra        Start local development infra in docker containers
     format       Format code overwriting if necessary
-    lint         Run static analysis checks for all packages and services
-    test         Run tests for all packages and services
+    lint         Run static analysis checks for all libs and apps
+    test         Run tests for all libs and apps
   ```
