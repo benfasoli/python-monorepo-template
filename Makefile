@@ -15,6 +15,10 @@ build:  ## Build docker image for each service
 dev: build  ## Build and run each service in a local docker container
 	docker compose up
 
+.PHONY: dev-infra
+dev-infra:  ## Start local development infra in docker containers
+	docker compose up db
+
 .PHONY: clean
 clean:  ## Remove development artifacts
 	rm -f `find . -name .coverage`
@@ -28,10 +32,6 @@ clean:  ## Remove development artifacts
 .PHONY: install
 install:  ## Install dependencies in .venv and refresh lockfile
 	uv sync
-
-.PHONY: infra
-infra:  ## Start local development infra in docker containers
-	docker compose up db
 
 .PHONY: format
 format:  ## Format code overwriting if necessary
