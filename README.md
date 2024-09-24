@@ -1,12 +1,11 @@
-This **python monorepo template** is for large codebases comprised of multiple python libraries (application layer logic, infrastructure facades, data (de)serialization, observability, etc.) and applications (HTTP APIs, data platform workers).
+This **python monorepo template** is for large codebases comprised of multiple python libraries (core domain logic, infrastructure facades, data (de)serialization, observability, etc.) and applications (HTTP APIs, asynchronous event workers).
 
 ## Highlights
 
-- Bleeding edge python tools for dependency management with [`uv` workspaces](https://docs.astral.sh/uv/concepts/workspaces/) and static analysis with [`ruff`](https://docs.astral.sh/ruff/)
+- Dependency management with [`uv` workspaces](https://docs.astral.sh/uv/concepts/workspaces/)
+- Linting and formatting analysis with [`ruff`](https://docs.astral.sh/ruff/)
 - Strong typing with [`pyright`](https://microsoft.github.io/pyright/#/)
-- Single virtual environment with editable package installs during development
-- Minimized service dependencies at runtime
-- Path-based package resolution for editable installs, discoverability, and drift safety. Opt-in for multi-version artifact-based package distributions.
+- Path-based package resolution for editable installs, composability, and drift safety. Selectively opt-in to artifact-based package distribution.
 
 ## Layout
 
