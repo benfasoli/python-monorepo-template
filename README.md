@@ -61,10 +61,10 @@ Create a new repo from this template and clone the repo.
   0 errors, 0 warnings, 0 informations
   ```
 
-- `make infra` will start local infra in docker containers.
+- `make dev-infra` will start local infra in docker containers.
 
   ```
-  > make infra
+  > make dev-infra
 
   ✔ Container monorepo-db-1  Created                                                                                                              0.0s
   Attaching to db-1
@@ -72,7 +72,7 @@ Create a new repo from this template and clone the repo.
   db-1  | This user must also own the server process.
   ```
 
-- `make test` will run pytest across all libraries and applications. Requires running `make infra` in a separate shell to monitor infra logs.
+- `make test` will run pytest across all libraries and applications. Requires running `make dev-infra` in a separate shell to monitor infra logs.
 
   ```
   > make test
