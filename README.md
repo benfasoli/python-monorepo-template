@@ -108,7 +108,7 @@ Create a new repo from this template and clone the repo.
   [+] Building 2.8s (18/18) FINISHED                                                                         docker:desktop-linux
   => [api internal] load build definition from Dockerfile                                                                   0.0s
   => => transferring dockerfile: 623B                                                                                       0.0s
-  => [worker internal] load metadata for ghcr.io/astral-sh/uv:0.4.5                                                         0.8s
+  => [worker internal] load metadata for ghcr.io/astral-sh/uv:0.4.15                                                        0.8s
   => [worker internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                        0.8s
   => [worker internal] load build definition from Dockerfile                                                                0.0s
   => => transferring dockerfile: 717B                                                                                       0.0s
