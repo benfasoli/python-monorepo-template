@@ -1,7 +1,7 @@
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 .PHONY: help
-help:  ## Show available options.
+help:  ## Show available options
 	@echo
 	@echo "\033[1mUsage\033[0m: make <COMMAND>\n"
 	@echo "\033[1mCommands\033[0m:\n"
@@ -10,14 +10,6 @@ help:  ## Show available options.
 .PHONY: build
 build:  ## Build docker image for each service
 	docker compose build
-
-.PHONY: dev
-dev: build  ## Build and run each service in a local docker container
-	docker compose up
-
-.PHONY: dev-infra
-dev-infra:  ## Start local development infra in docker containers
-	docker compose up db
 
 .PHONY: clean
 clean:  ## Remove development artifacts
@@ -28,6 +20,14 @@ clean:  ## Remove development artifacts
 	rm -rf `find . -name .venv`
 	rm -f `find . -name '*.pyc'`
 	rm -f `find . -name '*.pyo'`
+
+.PHONY: dev
+dev:  ## Build and run each service in a local docker container
+	docker compose up --build --remove-orphans
+
+.PHONY: dev-infra
+dev-infra:  ## Start local development infra in docker containers
+	docker compose up db
 
 .PHONY: install
 install:  ## Install dependencies in .venv and refresh lockfile
