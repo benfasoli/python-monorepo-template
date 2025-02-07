@@ -7,12 +7,16 @@ jobs:
     name: Lint & test
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/0.4.15/install.sh | sh
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.5.29"
+          enable-cache: true
 
       - name: Install python
         run: uv python install

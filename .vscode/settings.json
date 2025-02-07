@@ -1,8 +1,7 @@
 {
   "python.defaultInterpreterPath": ".venv/bin/python",
-  "python.analysis.extraPaths": ["**/src"],
+  "python.languageServer": "Pylance",
   "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": ["-vv", "."],
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": "never",
@@ -11,5 +10,6 @@
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,
     "editor.rulers": [88]
-  }
+  },
+  "ruff.importStrategy": "fromEnvironment"
 }
