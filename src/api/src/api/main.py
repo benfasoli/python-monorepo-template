@@ -1,9 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from lib.core import hello_world
 
-app = FastAPI(docs_url="/")
+app = FastAPI(
+    docs_url="/",
+    redoc_url=None,
+    swagger_ui_parameters={"defaultModelsExpandDepth": -1},
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_headers=["*"],
+    allow_methods=["*"],
+    allow_origins=["*"],
+)
 
 
 class GetIndexResponseDTO(BaseModel):

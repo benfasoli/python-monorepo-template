@@ -2,7 +2,7 @@ services:
   api:
     image: api:latest
     build:
-      dockerfile: apps/api/Dockerfile
+      dockerfile: src/api/Dockerfile
     ports:
       - 8080:8080
     depends_on:
@@ -12,13 +12,13 @@ services:
   worker:
     image: worker:latest
     build:
-      dockerfile: apps/worker/Dockerfile
+      dockerfile: src/worker/Dockerfile
     depends_on:
       db:
         condition: service_healthy
 
   db:
-    image: postgres:16
+    image: postgres:17-bookworm
     command: ["postgres", "-c", "log_statement=all"]
     environment:
       POSTGRES_USER: postgres
@@ -34,5 +34,3 @@ services:
       test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
       interval: 1s
       timeout: 1s
-      retries: 1
-      start_period: 5s

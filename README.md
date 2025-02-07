@@ -10,7 +10,8 @@ This **python monorepo template** is for large codebases comprised of multiple p
 ## Layout
 
 ```
-├── apps  # application entrypoints and orchestration logic grouped by context
+├── sql  # sql migration scripts
+├── src  # python packages containing application logic and supporting libraries
 │   ├── api
 │   │   ├── src  # src layout for tool discovery and import compatibility
 │   │   │   └── api
@@ -18,15 +19,7 @@ This **python monorepo template** is for large codebases comprised of multiple p
 │   │   ├── Dockerfile
 │   │   └── pyproject.toml  # service metadata and dependencies
 │   └── worker
-├── db  # sql migration scripts
-├── libs  # core functionality grouped in python packages
-│   ├── lib-core  # lib.core namespace package
-│   │   ├── lib
-│   │   │   └── core
-│   │   ├── tests
-│   │   └── pyproject.toml  # package metadata and dependencies
-│   └── lib-dtos
-├── compose.yaml  # build specs for services and infra dependencies
+├── compose.yaml  # build specs for services and local infra dependencies
 ├── Makefile  # development environment task runner, see dedicated section
 ├── pyproject.toml  # workspace metadata and global tool configs
 └── uv.lock  # cross-platform dependency lock file
@@ -41,13 +34,15 @@ Create a new repo from this template and clone the repo.
   ```
   > make install
 
+  Using CPython 3.13.2
+  Creating virtual environment at: .venv
   Resolved 32 packages in 6ms
-  Prepared 27 packages in 3ms
-  Installed 31 packages in 22ms
+  Installed 31 packages in 119ms
   + annotated-types==0.7.0
-  + anyio==4.4.0
-  + api==0.0.0 (from file:///Users/benfasoli/repos/monorepo/services/api)
-  + certifi==2024.7.4
+  + anyio==4.8.0
+  + api==0.0.0 (from file:///Users/benfasoli/repos/monorepo/src/api)
+  + certifi==2025.1.31
+  + click==8.1.8
   ...
   ```
 
@@ -64,38 +59,37 @@ Create a new repo from this template and clone the repo.
 - `make dev-infra` will start local infra in docker containers.
 
   ```
+
   > make dev-infra
 
-  ✔ Container monorepo-db-1  Created                                                                                                              0.0s
-  Attaching to db-1
-  db-1  | The files belonging to this database system will be owned by user "postgres".
-  db-1  | This user must also own the server process.
+  [+] Running 2/2
+  ✔ Network monorepo_default  Created
+  ✔ Container monorepo-db-1   Started
   ```
 
-- `make test` will run pytest across all libraries and applications. Requires running `make dev-infra` in a separate shell to monitor infra logs.
+- `make test` will discover and run tests across all packages. Implicitly runs `make dev-infra`.
 
   ```
   > make test
 
-  ---------- coverage: platform darwin, python 3.12.5-final-0 ----------
-  Name                                     Stmts   Miss  Cover   Missing
-  ----------------------------------------------------------------------
-  apps/api/src/api/__init__.py             0      0   100%
-  apps/api/src/api/main.py                10      0   100%
-  apps/api/tests/test_main.py             12      0   100%
-  apps/worker/src/worker/__init__.py       0      0   100%
-  apps/worker/src/worker/main.py           5      0   100%
-  apps/worker/src/worker/queue.py          7      0   100%
-  apps/worker/tests/test_main.py           8      0   100%
-  libs/lib-core/lib/core/__init__.py       2      0   100%
-  libs/lib-core/lib/core/hello.py          2      0   100%
-  libs/lib-core/tests/test_core.py         9      0   100%
-  libs/lib-dtos/lib/dtos/__init__.py       2      0   100%
-  libs/lib-dtos/lib/dtos/message.py        4      0   100%
-  libs/lib-dtos/tests/test_dtos.py         7      0   100%
-  ----------------------------------------------------------------------
-  TOTAL                                       68      0   100%
-
+  ---------- coverage: platform darwin, python 3.13.2-final-0 ----------
+  Name                                Stmts   Miss  Cover   Missing
+  -----------------------------------------------------------------
+  src/api/src/api/__init__.py             0      0   100%
+  src/api/src/api/main.py                10      0   100%
+  src/api/tests/test_main.py             12      0   100%
+  src/lib-core/lib/core/__init__.py       2      0   100%
+  src/lib-core/lib/core/hello.py          2      0   100%
+  src/lib-core/tests/test_core.py         9      0   100%
+  src/lib-dtos/lib/dtos/__init__.py       2      0   100%
+  src/lib-dtos/lib/dtos/message.py        4      0   100%
+  src/lib-dtos/tests/test_dtos.py         7      0   100%
+  src/worker/src/worker/__init__.py       0      0   100%
+  src/worker/src/worker/main.py           5      0   100%
+  src/worker/src/worker/queue.py          7      0   100%
+  src/worker/tests/test_main.py           8      0   100%
+  -----------------------------------------------------------------
+  TOTAL                                  68      0   100%
 
   ========================= 6 passed in 1.19s ==========================
   ```
@@ -105,41 +99,35 @@ Create a new repo from this template and clone the repo.
   ```
   > make build
 
-  [+] Building 2.8s (18/18) FINISHED                                                                         docker:desktop-linux
-  => [api internal] load build definition from Dockerfile                                                                   0.0s
-  => => transferring dockerfile: 623B                                                                                       0.0s
-  => [worker internal] load metadata for ghcr.io/astral-sh/uv:0.4.15                                                        0.8s
-  => [worker internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                        0.8s
-  => [worker internal] load build definition from Dockerfile                                                                0.0s
-  => => transferring dockerfile: 717B                                                                                       0.0s
-  => [worker internal] load .dockerignore                                                                                   0.0s
-  => => transferring context: 265B                                                                                          0.0s
-  => [api internal] load .dockerignore                                                                                      0.0s
-  => => transferring context: 265B                                                                                          0.0s
   ...
+  ✔ api     Built
+  ✔ worker  Built
   ```
 
-- `make dev` will `make build` then start both local infra and local service docker containers, forwarding ports to the host system.
+- `make dev` will build and start local infra and local service docker containers, forwarding ports to the host system.
 
-  ```
-  > make dev
+```
 
-  ✔ Container monorepo-db-1      Created                                                                                    0.0s
-  ✔ Container monorepo-worker-1  Created                                                                                    0.0s
-  ✔ Container monorepo-api-1     Created                                                                                    0.0s
-  ...
-  ```
+> make dev
+
+✔ Container monorepo-db-1 Created 0.0s
+✔ Container monorepo-worker-1 Created 0.0s
+✔ Container monorepo-api-1 Created 0.0s
+...
+
+```
 
 - `make clean` will remove all temporary development files (`.venv`, caches, coverage reports, etc.) from the source tree.
 
 - `make help` will print all available options
 
-  ```
-  > make help
+```
 
-  Usage: make <COMMAND>
+> make help
 
-  Commands:
+Usage: make <COMMAND>
+
+Commands:
 
     help         Show available options.
     build        Build docker image for each service
@@ -150,4 +138,9 @@ Create a new repo from this template and clone the repo.
     format       Format code overwriting if necessary
     lint         Run static analysis checks for all libs and apps
     test         Run tests for all libs and apps
-  ```
+
+```
+
+```
+
+```

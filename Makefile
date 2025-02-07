@@ -1,5 +1,3 @@
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
-
 .PHONY: help
 help:  ## Show available options
 	@echo
@@ -8,41 +6,41 @@ help:  ## Show available options
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: build
-build:  ## Build docker image for each service
-	docker compose build
+build:  ## Build docker images configured in compose.yaml
+	@docker compose build
 
 .PHONY: clean
 clean:  ## Remove development artifacts
-	rm -f `find . -name .coverage`
-	rm -rf `find . -name .pdm-build`
-	rm -rf `find . -name .pytest_cache`
-	rm -rf `find . -name .ruff_cache`
-	rm -rf `find . -name .venv`
-	rm -f `find . -name '*.pyc'`
-	rm -f `find . -name '*.pyo'`
+	@rm -rf `find . -name .venv`
+	@rm -f `find . -name .coverage`
+	@rm -rf `find . -name .pdm-build`
+	@rm -rf `find . -name .pytest_cache`
+	@rm -rf `find . -name .ruff_cache`
+	@rm -f `find . -name '*.pyc'`
+	@rm -f `find . -name '*.pyo'`
 
 .PHONY: dev
 dev:  ## Build and run each service in a local docker container
-	docker compose up --build --remove-orphans
+	@docker compose up --build --remove-orphans
 
 .PHONY: dev-infra
 dev-infra:  ## Start local development infra in docker containers
-	docker compose up db
+	@docker compose up -d --remove-orphans db
 
 .PHONY: install
-install:  ## Install dependencies in .venv and refresh lockfile
-	uv sync
+install:  ## Install dependencies and refresh lockfile
+	@uv sync
 
 .PHONY: format
 format:  ## Format code overwriting if necessary
-	uv run -- ruff format
+	@uv run -- ruff format
 
 .PHONY: lint
-lint:  ## Run static analysis checks for all libs and apps
-	uv run -- ruff format --check
-	uv run -- ruff check
-	uv run -- pyright
+lint:  ## Run static analysis checks for all packages
+	@uv run -- ruff format --check
+	@uv run -- ruff check
+	@uv run -- pyright
 
 .PHONY: test
-test:  ## Run tests for all libs and apps
-	uv run -- pytest --cov-report=term-missing --cov .
+test: dev-infra  ## Run tests for all packages
+	@uv run -- pytest --cov-report=term-missing --cov .

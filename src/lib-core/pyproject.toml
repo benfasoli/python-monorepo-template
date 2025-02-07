@@ -1,10 +1,8 @@
 [project]
-name = "lib.dtos"
+name = "lib.core"
 version = "0.0.0"
-requires-python = "~=3.12"
-dependencies = [
-    "pydantic ~= 2.8",
-]
+requires-python = "~=3.13.0"
+dependencies = []
 
 [tool.uv]
 dev-dependencies = []
