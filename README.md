@@ -59,7 +59,6 @@ Create a new repo from this template and clone the repo.
 - `make dev-infra` will start local infra in docker containers.
 
   ```
-
   > make dev-infra
 
   [+] Running 2/2
@@ -106,28 +105,25 @@ Create a new repo from this template and clone the repo.
 
 - `make dev` will build and start local infra and local service docker containers, forwarding ports to the host system.
 
-```
+  ```
+  > make dev
 
-> make dev
-
-✔ Container monorepo-db-1 Created 0.0s
-✔ Container monorepo-worker-1 Created 0.0s
-✔ Container monorepo-api-1 Created 0.0s
-...
-
-```
+  ✔ Container monorepo-db-1 Created 0.0s
+  ✔ Container monorepo-worker-1 Created 0.0s
+  ✔ Container monorepo-api-1 Created 0.0s
+  ...
+  ```
 
 - `make clean` will remove all temporary development files (`.venv`, caches, coverage reports, etc.) from the source tree.
 
 - `make help` will print all available options
 
-```
+  ```
+  > make help
 
-> make help
+  Usage: make <COMMAND>
 
-Usage: make <COMMAND>
-
-Commands:
+  Commands:
 
     help         Show available options.
     build        Build docker image for each service
@@ -138,9 +134,4 @@ Commands:
     format       Format code overwriting if necessary
     lint         Run static analysis checks for all libs and apps
     test         Run tests for all libs and apps
-
-```
-
-```
-
-```
+  ```
