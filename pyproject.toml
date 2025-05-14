@@ -1,3 +1,13 @@
+
+[dependency-groups]
+dev = [
+    "pyright ~= 1.1",
+    "pytest ~= 8.3",
+    "pytest-asyncio ~= 0.24",
+    "pytest-cov ~= 5.0",
+    "ruff ~= 0.6",
+]
+
 [tool.pyright]
 typeCheckingMode = "strict"
 
@@ -17,18 +27,9 @@ select = ["E", "F", "UP", "B", "SIM", "I"]
 [tool.ruff.lint.isort]
 known-first-party = ["lib"]
 
-[tool.uv]
-dev-dependencies = [
-    "pyright ~= 1.1",
-    "pytest ~= 8.3",
-    "pytest-asyncio ~= 0.24",
-    "pytest-cov ~= 5.0",
-    "ruff ~= 0.6",
-]
-
 [tool.uv.sources]
-lib-core = { workspace = true }
-lib-dtos = { workspace = true }
+core = { workspace = true }
+dtos = { workspace = true }
 
 [tool.uv.workspace]
 members = ["src/*"]

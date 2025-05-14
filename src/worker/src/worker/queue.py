@@ -1,7 +1,7 @@
 from collections.abc import AsyncIterator
 
-from lib.core import hello_world
-from lib.dtos import Message
+from core import hello_world
+from dtos import Message
 
 
 class Queue:

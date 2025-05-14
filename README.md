@@ -75,20 +75,19 @@ Create a new repo from this template and clone the repo.
   Name                                Stmts   Miss  Cover   Missing
   -----------------------------------------------------------------
   src/api/src/api/__init__.py             0      0   100%
-  src/api/src/api/main.py                10      0   100%
+  src/api/src/api/main.py                12      0   100%
   src/api/tests/test_main.py             12      0   100%
-  src/lib-core/lib/core/__init__.py       2      0   100%
-  src/lib-core/lib/core/hello.py          2      0   100%
-  src/lib-core/tests/test_core.py         9      0   100%
-  src/lib-dtos/lib/dtos/__init__.py       2      0   100%
-  src/lib-dtos/lib/dtos/message.py        4      0   100%
-  src/lib-dtos/tests/test_dtos.py         7      0   100%
+  src/core/src/core/__init__.py           3      0   100%
+  src/core/tests/test_core.py             9      0   100%
+  src/dtos/src/dtos/__init__.py           2      0   100%
+  src/dtos/src/dtos/message.py            4      0   100%
+  src/dtos/tests/test_dtos.py             7      0   100%
   src/worker/src/worker/__init__.py       0      0   100%
   src/worker/src/worker/main.py           5      0   100%
   src/worker/src/worker/queue.py          7      0   100%
   src/worker/tests/test_main.py           8      0   100%
   -----------------------------------------------------------------
-  TOTAL                                  68      0   100%
+  TOTAL                                  69      0   100%
 
   ========================= 6 passed in 1.19s ==========================
   ```

@@ -18,4 +18,4 @@ RUN --mount=from=ghcr.io/astral-sh/uv:0.5.29,source=/uv,target=/bin/uv \
 ENV PATH=".venv/bin:${PATH}"
 ENV PYTHONPATH=${SERVICE_ROOT}
 
-CMD python -m src.worker
+CMD ["python", "-m", "src.worker"]

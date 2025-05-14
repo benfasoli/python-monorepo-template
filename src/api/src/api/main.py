@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from lib.core import hello_world
+from core import hello_world
 
 app = FastAPI(
     docs_url="/",

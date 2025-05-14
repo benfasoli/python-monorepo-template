@@ -1,4 +1,4 @@
-from lib.dtos import Message
+from dtos import Message
 
 
 def test_message() -> None:

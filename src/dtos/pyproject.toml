@@ -1,11 +1,11 @@
 [project]
-name = "worker"
+name = "dtos"
 version = "0.0.0"
 requires-python = "~=3.13.0"
-dependencies = ["core", "dtos"]
+dependencies = ["pydantic ~= 2.8"]
 
 [dependency-groups]
-dev = ["python-dotenv[cli] ~= 1.0"]
+dev = []
 
 [build-system]
 requires = ["uv_build>=0.7.3,<0.8.0"]

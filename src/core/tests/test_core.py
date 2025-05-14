@@ -1,4 +1,4 @@
-from lib.core import hello_world
+from core import hello_world
 
 
 async def test_hello_world() -> None:
