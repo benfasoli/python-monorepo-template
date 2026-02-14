@@ -1,11 +1,7 @@
 **/.coverage
 **/.local
-**/.pdm-build
-**/.pdm-python
 **/.pytest_cache
 **/.ruff_cache
 **/.venv
-**/*.egg*
 **/*.py[cod]
-**/*.so
 **/__pycache__

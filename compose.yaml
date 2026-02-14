@@ -3,8 +3,10 @@ services:
     image: api:latest
     build:
       dockerfile: src/api/Dockerfile
+      tags:
+        - registry.com/api:${TAG:-latest}
     ports:
-      - 8080:8080
+      - 8000:8000
     depends_on:
       db:
         condition: service_healthy
@@ -13,6 +15,8 @@ services:
     image: worker:latest
     build:
       dockerfile: src/worker/Dockerfile
+      tags:
+        - registry.com/worker:${TAG:-latest}
     depends_on:
       db:
         condition: service_healthy

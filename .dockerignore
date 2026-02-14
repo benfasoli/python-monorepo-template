@@ -1,21 +1,19 @@
-# .gitignore
 **/.coverage
+**/.dockerignore
+**/.gitignore
 **/.local
-**/.pdm-build
-**/.pdm-python
 **/.pytest_cache
 **/.ruff_cache
 **/.venv
-**/*.egg*
 **/*.py[cod]
 **/*.so
 **/__pycache__
-
-# .dockerignore
-**/.gitignore
 **/tests
+
 .git
 .github
 .vscode
 compose.yaml
+helm
+sql
 terraform

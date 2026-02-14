@@ -6,6 +6,8 @@ from types import TracebackType
 
 logger = logging.getLogger(__name__)
 
+_prev_excepthook = sys.excepthook
+
 
 def _on_unhandled_exception(
     exc_type: type[BaseException],
@@ -14,6 +16,7 @@ def _on_unhandled_exception(
 ) -> None:
     exc_info = (exc_type, exc_value, exc_traceback)
     logger.critical("Unhandled exception", exc_info=exc_info)
+    _prev_excepthook(exc_type, exc_value, exc_traceback)
 
 
 sys.excepthook = _on_unhandled_exception

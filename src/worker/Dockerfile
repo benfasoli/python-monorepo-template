@@ -1,21 +1,29 @@
-FROM python:3.13-slim-bookworm
+FROM python:3.14-slim-bookworm
 
-ENV SERVICE_NAME=worker
-ENV SERVICE_ROOT=src/${SERVICE_NAME}
+ENV PACKAGE=worker
 
-WORKDIR /src
+# Set uv behavior for production installs.
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+ENV UV_NO_DEV=1
+ENV UV_NO_EDITABLE=1
+ENV UV_NO_MANAGED_PYTHON=1
+ENV UV_NO_SYNC=1
+ENV UV_SYSTEM_PYTHON=1
 
-COPY . .
-RUN --mount=from=ghcr.io/astral-sh/uv:0.5.29,source=/uv,target=/bin/uv \
+WORKDIR /app
+
+# Install external python dependencies
+COPY pyproject.toml uv.lock ./
+RUN --mount=from=ghcr.io/astral-sh/uv:0.10.2,source=/uv,target=/bin/uv \
     --mount=type=cache,target=/root/.cache/uv \
-    uv sync \
-    --compile-bytecode \
-    --locked \
-    --no-dev \
-    --package=${SERVICE_NAME} \
-    --python-preference=only-system
+    uv sync --frozen --no-install-workspace --package=${PACKAGE}
 
-ENV PATH=".venv/bin:${PATH}"
-ENV PYTHONPATH=${SERVICE_ROOT}
+# Install project python dependencies
+COPY . .
+RUN --mount=from=ghcr.io/astral-sh/uv:0.10.2,source=/uv,target=/bin/uv \
+    --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --package=${PACKAGE}
 
-CMD ["python", "-m", "src.worker"]
+ENV PATH="/app/.venv/bin:$PATH"
+CMD ["python", "-m", "worker"]
