@@ -1,12 +1,12 @@
 [project]
 name = "dtos"
 version = "0.0.0"
-requires-python = "~=3.13.0"
+requires-python = "~=3.14.0"
 dependencies = ["pydantic ~= 2.8"]
 
 [dependency-groups]
 dev = []
 
 [build-system]
-requires = ["uv_build>=0.7.3,<0.8.0"]
+requires = ["uv_build>=0.10.2,<0.11.0"]
 build-backend = "uv_build"

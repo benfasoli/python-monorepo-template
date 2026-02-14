@@ -24,7 +24,7 @@ dev:  ## Build and run each service in a local docker container
 	@docker compose up --build --remove-orphans
 
 .PHONY: dev-infra
-dev-infra:  ## Start local development infra in docker containers
+infra:  ## Start local development infra in docker containers
 	@docker compose up -d --remove-orphans db
 
 .PHONY: install
@@ -42,5 +42,5 @@ lint:  ## Run static analysis checks for all packages
 	@uv run -- pyright
 
 .PHONY: test
-test: dev-infra  ## Run tests for all packages
+test: infra  ## Run tests for all packages
 	@uv run -- pytest --cov-report=term-missing --cov .
