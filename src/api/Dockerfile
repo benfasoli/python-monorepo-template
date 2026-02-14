@@ -1,7 +1,6 @@
 FROM python:3.14-slim-bookworm
 
 ENV PACKAGE=api
-ENV PORT=8000
 
 # Set uv behavior for production installs.
 ENV UV_COMPILE_BYTECODE=1
