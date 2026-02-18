@@ -32,7 +32,7 @@ Create a new repo from this template and clone the repo.
 - `make install` will create a virtual environment at `.venv`, resolve runtime + development dependencies defined in `packages/*/pyproject.toml` and `services/*/pyproject.toml` updating `uv.lock` if necessary, and install the runtime + development dependencies.
 
   ```console
-  > make install
+  $ make install
 
   Using CPython 3.13.2
   Creating virtual environment at: .venv
@@ -49,7 +49,7 @@ Create a new repo from this template and clone the repo.
 - `make lint` will check the code for compatibility with formatting, linting, and type checking requirement. `make format` will fix most formatting issues.
 
   ```console
-  > make lint
+  $ make lint
 
   14 files already formatted
   All checks passed!
@@ -59,7 +59,7 @@ Create a new repo from this template and clone the repo.
 - `make dev-infra` will start local infra in docker containers.
 
   ```console
-  > make dev-infra
+  $ make dev-infra
 
   [+] Running 2/2
   ✔ Network monorepo_default  Created
@@ -69,7 +69,7 @@ Create a new repo from this template and clone the repo.
 - `make test` will discover and run tests across all packages. Implicitly runs `make dev-infra`.
 
   ```console
-  > make test
+  $ make test
 
   ---------- coverage: platform darwin, python 3.13.2-final-0 ----------
   Name                                Stmts   Miss  Cover   Missing
@@ -95,7 +95,7 @@ Create a new repo from this template and clone the repo.
 - `make build` will build deployable docker images for all services.
 
   ```console
-  > make build
+  $ make build
 
   ...
   ✔ api     Built
@@ -105,7 +105,7 @@ Create a new repo from this template and clone the repo.
 - `make dev` will build and start local infra and local service docker containers, forwarding ports to the host system.
 
   ```console
-  > make dev
+  $ make dev
 
   ✔ Container monorepo-db-1 Created 0.0s
   ✔ Container monorepo-worker-1 Created 0.0s
@@ -118,7 +118,7 @@ Create a new repo from this template and clone the repo.
 - `make help` will print all available options
 
   ```console
-  > make help
+  $ make help
 
   Usage: make <COMMAND>
 
