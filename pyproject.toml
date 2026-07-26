@@ -21,7 +21,7 @@ target-version = "py314"
 src = ["src/"]
 
 [tool.ruff.lint]
-select = ["E", "F", "UP", "B", "SIM", "I"]
+extend-select = ["E", "F", "UP", "B", "SIM"]
 
 [tool.uv.sources]
 core = { workspace = true }
