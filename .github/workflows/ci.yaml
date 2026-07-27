@@ -24,9 +24,6 @@ jobs:
           version: "0.11.32"
           enable-cache: true
 
-      - name: Install python 🐍
-        run: uv python install
-
       - name: Install python dependencies 🐍
         run: uv sync --locked
 
