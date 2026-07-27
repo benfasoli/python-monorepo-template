@@ -22,7 +22,7 @@ services:
         condition: service_healthy
 
   db:
-    image: postgres:17-bookworm
+    image: postgres:18-bookworm
     command: ["postgres", "-c", "log_statement=all"]
     environment:
       POSTGRES_USER: postgres

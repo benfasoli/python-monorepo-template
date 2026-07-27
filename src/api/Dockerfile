@@ -14,12 +14,12 @@ ENV UV_SYSTEM_PYTHON=1
 WORKDIR /app
 
 COPY pyproject.toml uv.lock ./
-RUN --mount=from=ghcr.io/astral-sh/uv:0.10.2,source=/uv,target=/bin/uv \
+RUN --mount=from=ghcr.io/astral-sh/uv:0.11.32,source=/uv,target=/bin/uv \
     --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-install-workspace --package=${PACKAGE}
 
 COPY . .
-RUN --mount=from=ghcr.io/astral-sh/uv:0.10.2,source=/uv,target=/bin/uv \
+RUN --mount=from=ghcr.io/astral-sh/uv:0.11.32,source=/uv,target=/bin/uv \
     --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --package=${PACKAGE}
 

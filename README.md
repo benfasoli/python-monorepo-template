@@ -34,7 +34,7 @@ Create a new repo from this template and clone the repo.
   ```console
   $ make install
 
-  Using CPython 3.13.2
+  Using CPython 3.14.6
   Creating virtual environment at: .venv
   Resolved 32 packages in 6ms
   Installed 31 packages in 119ms
@@ -71,7 +71,7 @@ Create a new repo from this template and clone the repo.
   ```console
   $ make test
 
-  ---------- coverage: platform darwin, python 3.13.2-final-0 ----------
+  ---------- coverage: platform darwin, python 3.14.6-final-0 ----------
   Name                                Stmts   Miss  Cover   Missing
   -----------------------------------------------------------------
   src/api/src/api/__init__.py             0      0   100%
